@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physiology 3 Lecture No. 1 MCQs Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .author {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .question-number {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: #f1f8ff;
+            border-color: #a3d0fd;
+        }
+        .option.selected {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .score-value {
+            font-size: 48px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: #2ecc71;
+        }
+        .restart-btn:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Physiology 3 Lecture No. 1 MCQs Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Physiology 3 Lecture No. 1</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">35</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">35</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/35</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is described as the 'higher most body control system'?",
+                options: [
+                    "The endocrine system",
+                    "The nervous system",
+                    "The musculoskeletal system",
+                    "The cardiovascular system"
+                ],
+                answer: 1,
+                explanation: "The nervous system (Page 4)"
+            },
+            {
+                question: "Which of the following is a component of the Central Nervous System (CNS)?",
+                options: [
+                    "Sensory receptors",
+                    "Spinal nerves",
+                    "Spinal cord",
+                    "Ganglia"
+                ],
+                answer: 2,
+                explanation: "Spinal cord (Page 4)"
+            },
+            {
+                question: "The functional unit of the nervous system is the:",
+                options: [
+                    "Glial cell",
+                    "Synapse",
+                    "Neuron",
+                    "Axon"
+                ],
+                answer: 2,
+                explanation: "Neuron (Page 4)"
+            },
+            {
+                question: "The division of the nervous system that communicates with internal organs and glands is the:",
+                options: [
+                    "Somatic nervous system",
+                    "Autonomic nervous system",
+                    "Central nervous system",
+                    "Sensory nervous system"
+                ],
+                answer: 1,
+                explanation: "Autonomic nervous system (Page 6)"
+            },
+            {
+                question: "Which functional division carries information into the nervous system from sensory receptors?",
+                options: [
+                    "Motor (efferent) division",
+                    "Autonomic division",
+                    "Somatic division",
+                    "Sensory (afferent) division"
+                ],
+                answer: 3,
+                explanation: "Sensory (afferent) division (Page 7)"
+            },
+            {
+                question: "The basic tasks of the nervous system, in correct order, are:",
+                options: [
+                    "Integration → Motor Output → Sensory Input",
+                    "Sensory Input → Integration → Motor Output",
+                    "Motor Output → Sensory Input → Integration",
+                    "Integration → Sensory Input → Motor Output"
+                ],
+                answer: 1,
+                explanation: "Sensory Input → Integration → Motor Output (Page 8)"
+            },
+            {
+                question: "On a neuron, the region where depolarizing signals are integrated to initiate an action potential is called the:",
+                options: [
+                    "Input region",
+                    "Propagation region",
+                    "Trigger zone",
+                    "Chemical release zone"
+                ],
+                answer: 2,
+                explanation: "Trigger zone (Page 12)"
+            },
+            {
+                question: "Neurons that carry information from the central nervous system to skeletal muscles are classified as:",
+                options: [
+                    "Somatic motor neurons",
+                    "Sensory neurons",
+                    "Autonomic motor neurons",
+                    "Interneurons"
+                ],
+                answer: 0,
+                explanation: "Somatic motor neurons (Page 14)"
+            },
+            {
+                question: "Which glial cell is responsible for forming the blood-brain barrier and maintaining the chemical environment for nerve impulses in the CNS?",
+                options: [
+                    "Oligodendrocytes",
+                    "Microglia",
+                    "Astrocytes",
+                    "Schwann cells"
+                ],
+                answer: 2,
+                explanation: "Astrocytes (Page 31)"
+            },
+            {
+                question: "The myelin sheath around axons in the Peripheral Nervous System (PNS) is formed by:",
+                options: [
+                    "Oligodendrocytes",
+                    "Astrocytes",
+                    "Microglia",
+                    "Schwann cells"
+                ],
+                answer: 3,
+                explanation: "Schwann cells (Page 32)"
+            },
+            {
+                question: "Which PNS glial cells provide structural support and regulate material exchange for neuronal cell bodies?",
+                options: [
+                    "Schwann cells",
+                    "Satellite cells",
+                    "Oligodendrocytes",
+                    "Astrocytes"
+                ],
+                answer: 1,
+                explanation: "Satellite cells (Page 32)"
+            },
+            {
+                question: "Small, localized changes in membrane potential that vary in amplitude are known as:",
+                options: [
+                    "Action potentials",
+                    "Threshold potentials",
+                    "Graded potentials",
+                    "Resting potentials"
+                ],
+                answer: 2,
+                explanation: "Graded potentials (Page 17)"
+            },
+            {
+                question: "In graded potential, what occurs when potassium (K+) channels open, allowing K+ to efflux from the cell?",
+                options: [
+                    "Depolarization",
+                    "Repolarization",
+                    "Hyperpolarization",
+                    "Threshold potential"
+                ],
+                answer: 2,
+                explanation: "Hyperpolarization (Page 18)"
+            },
+            {
+                question: "An action potential is best described as:",
+                options: [
+                    "A graded response",
+                    "An all-or-nothing response",
+                    "A localized potential",
+                    "A decremental signal"
+                ],
+                answer: 1,
+                explanation: "An all-or-nothing response (Page 19, 24)"
+            },
+            {
+                question: "During the depolarization phase of an action potential, which ion channels are primarily open?",
+                options: [
+                    "Potassium (K+) channels",
+                    "Chloride (Cl-) channels",
+                    "Sodium (Na+) channels",
+                    "Calcium (Ca2+) channels"
+                ],
+                answer: 2,
+                explanation: "Sodium (Na+) channels (Page 21)"
+            },
+            {
+                question: "The period during which a second action potential can only be initiated by a stronger-than-normal stimulus is the:",
+                options: [
+                    "Absolute refractory period",
+                    "Resting period",
+                    "Relative refractory period",
+                    "Depolarization period"
+                ],
+                answer: 2,
+                explanation: "Relative refractory period (Page 25)"
+            },
+            {
+                question: "Why does the action potential travel in only one direction along the axon?",
+                options: [
+                    "The axon hillock blocks backward flow.",
+                    "The myelin sheath is unidirectional.",
+                    "Previously activated Na+ channels are in a refractory state.",
+                    "Potassium influx prevents backward depolarization."
+                ],
+                answer: 2,
+                explanation: "Previously activated Na+ channels are in a refractory state. (Page 26)"
+            },
+            {
+                question: "In myelinated axons, action potentials 'jump' from node to node in a process called:",
+                options: [
+                    "Saltatory conduction",
+                    "Continuous conduction",
+                    "Synaptic transmission",
+                    "Graded propagation"
+                ],
+                answer: 0,
+                explanation: "Saltatory conduction (Page 29)"
+            },
+            {
+                question: "The primary advantage of saltatory conduction is that it:",
+                options: [
+                    "Reduces the energy requirement for the sodium-potassium pump",
+                    "Allows for bidirectional communication",
+                    "Increases the speed of nerve impulse conduction",
+                    "Decreases the need for ion channels"
+                ],
+                answer: 2,
+                explanation: "Increases the speed of nerve impulse conduction (Page 29, 30)"
+            },
+            {
+                question: "A bundle of axons located outside the central nervous system is called a:",
+                options: [
+                    "Tract",
+                    "Nucleus",
+                    "Ganglion",
+                    "Nerve"
+                ],
+                answer: 3,
+                explanation: "Nerve (Page 33)"
+            },
+            {
+                question: "The most common type of nerve, such as the sciatic nerve, is classified as:",
+                options: [
+                    "Mixed",
+                    "Sensory",
+                    "Motor",
+                    "Associative"
+                ],
+                answer: 0,
+                explanation: "Mixed (Page 33)"
+            },
+            {
+                question: "Which type of nerve fiber has the largest diameter and fastest conduction velocity?",
+                options: [
+                    "A alpha (Aα)",
+                    "A delta (Aδ)",
+                    "B fibers",
+                    "C fibers"
+                ],
+                answer: 0,
+                explanation: "A alpha (Aα) (Page 37)"
+            },
+            {
+                question: "Which of the following nerve fiber types is unmyelinated and has the slowest conduction velocity?",
+                options: [
+                    "A beta (Aβ)",
+                    "Type II",
+                    "B fibers",
+                    "C fibers"
+                ],
+                answer: 3,
+                explanation: "C fibers (Page 37)"
+            },
+            {
+                question: "Type Ia and Ib sensory nerve fibers are characterized by:",
+                options: [
+                    "Being unmyelinated",
+                    "Having the smallest diameter",
+                    "Having the fastest conduction velocity",
+                    "Carrying slow pain signals"
+                ],
+                answer: 2,
+                explanation: "Having the fastest conduction velocity (Page 37)"
+            },
+            {
+                question: "Nerve fibers that carry information from Golgi tendon organs are classified as:",
+                options: [
+                    "Type Ia",
+                    "Type Ib",
+                    "Type II",
+                    "Type IV"
+                ],
+                answer: 1,
+                explanation: "Type Ib (Page 37)"
+            },
+            {
+                question: "An involuntary response to a stimulus that is essential for homeostasis is a:",
+                options: [
+                    "Voluntary action",
+                    "Reflex action",
+                    "Integrated response",
+                    "Motor plan"
+                ],
+                answer: 1,
+                explanation: "Reflex action (Page 38)"
+            },
+            {
+                question: "The nerve pathway through which a reflex action occurs is called a:",
+                options: [
+                    "Sensory tract",
+                    "Motor pathway",
+                    "Reflex arc",
+                    "Neural circuit"
+                ],
+                answer: 2,
+                explanation: "Reflex arc (Page 38)"
+            },
+            {
+                question: "The basic reflex involved in maintaining muscle tone is the:",
+                options: [
+                    "Withdrawal reflex",
+                    "Golgi tendon reflex",
+                    "Stretch reflex",
+                    "Crossed-extensor reflex"
+                ],
+                answer: 2,
+                explanation: "Stretch reflex (Page 43)"
+            },
+            {
+                question: "Which part of the nervous system is responsible for the integrative function?",
+                options: [
+                    "Peripheral Nervous System (PNS)",
+                    "Central Nervous System (CNS)",
+                    "Autonomic Nervous System",
+                    "Sensory Receptors"
+                ],
+                answer: 1,
+                explanation: "Central Nervous System (CNS) (Page 39)"
+            },
+            {
+                question: "The perception of sensory information (e.g., touch, pain) occurs in the:",
+                options: [
+                    "Sensory receptors",
+                    "Sensory pathways",
+                    "Spinal cord",
+                    "Sensory cortex"
+                ],
+                answer: 3,
+                explanation: "Sensory cortex (Page 42)"
+            },
+            {
+                question: "Coordination of voluntary movement and muscle tone is primarily the function of the:",
+                options: [
+                    "Thalamus and Hypothalamus",
+                    "Motor Cortex and Spinal Cord",
+                    "Limbic System and Brainstem",
+                    "Cerebellum and Basal Ganglia"
+                ],
+                answer: 3,
+                explanation: "Cerebellum and Basal Ganglia (Page 43)"
+            },
+            {
+                question: "The origin of the Olfactory Nerve (Cranial Nerve I) connects with which part of the brain?",
+                options: [
+                    "Midbrain",
+                    "Pons",
+                    "Medulla",
+                    "Cerebrum"
+                ],
+                answer: 3,
+                explanation: "Cerebrum (Page 35)"
+            },
+            {
+                question: "The Glossopharyngeal Nerve (Cranial Nerve IX) connects with which part of the brain?",
+                options: [
+                    "Cerebrum",
+                    "Midbrain",
+                    "Pons",
+                    "Medulla"
+                ],
+                answer: 3,
+                explanation: "Medulla (Page 35)"
+            },
+            {
+                question: "Which of the following is considered a higher function of the brain?",
+                options: [
+                    "Memory and learning",
+                    "Spinal reflex",
+                    "Muscle contraction",
+                    "Sensory transduction"
+                ],
+                answer: 0,
+                explanation: "Memory and learning (Page 44)"
+            },
+            {
+                question: "The functional organization for voluntary movements involves orders originating from the:",
+                options: [
+                    "Cerebellum",
+                    "Cortex (CTX)",
+                    "Spinal Cord",
+                    "Brainstem"
+                ],
+                answer: 1,
+                explanation: "Cortex (CTX) (Page 43)"
+            }
+        ];
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${String.fromCharCode(65 + question.answer)}) ${question.options[question.answer]}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Physiology 3 Lecture No. 1.';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>

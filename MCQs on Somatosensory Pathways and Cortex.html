@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQs on Physiology 3 Lecture No. 3 Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+        .author {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .question-number {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: #f1f8ff;
+            border-color: #a3d0fd;
+        }
+        .option.selected {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .score-value {
+            font-size: 48px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: #2ecc71;
+        }
+        .restart-btn:hover {
+            background: #27ae60;
+        }
+        .review-btn {
+            margin-top: 20px;
+            background: #f39c12;
+        }
+        .review-btn:hover {
+            background: #e67e22;
+        }
+        .review-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        .review-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        .review-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid #e74c3c;
+            background: white;
+            border-radius: 4px;
+        }
+        .review-question-number {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 8px;
+        }
+        .review-question-text {
+            margin-bottom: 10px;
+        }
+        .review-answer {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .review-correct {
+            color: #28a745;
+        }
+        .review-explanation {
+            margin-top: 5px;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MCQs on Physiology 3 Lecture No. 3 Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Physiology 3 Lecture No. 3</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">30</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">30</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/30</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+            <button class="review-btn" id="review-btn">Review Incorrect Answers</button>
+        </div>
+
+        <div id="review-section" class="review-section">
+            <h2 class="review-title">Questions Answered Incorrectly</h2>
+            <div id="incorrect-questions-list"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "The posterior column pathway is primarily responsible for transmitting which of the following sensations?",
+                options: [
+                    "Pain and temperature",
+                    "Fine touch, vibrations, and proprioception",
+                    "Crude touch and tickle",
+                    "Itch and sexual sensations"
+                ],
+                answer: 1,
+                explanation: "Fine touch, vibrations, and proprioception (Page 38)"
+            },
+            {
+                question: "The anterolateral pathway transmits all of the following sensations EXCEPT:",
+                options: [
+                    "Fine pressure",
+                    "Pain",
+                    "Crude touch",
+                    "Temperature (warm and cold)"
+                ],
+                answer: 0,
+                explanation: "Fine pressure (Page 43)"
+            },
+            {
+                question: "Where do the first-order neurons of the posterior column pathway synapse?",
+                options: [
+                    "Dorsal horn of the spinal cord",
+                    "Gracile and Cuneate nuclei in the medulla",
+                    "Ventral posterolateral nucleus of the thalamus",
+                    "Substantia gelatinosa"
+                ],
+                answer: 1,
+                explanation: "Gracile and Cuneate nuclei in the medulla (Page 40)"
+            },
+            {
+                question: "At what level does the decussation (crossing over) of the second-order neurons in the posterior column pathway occur?",
+                options: [
+                    "Spinal cord",
+                    "Medulla",
+                    "Pons",
+                    "Midbrain"
+                ],
+                answer: 1,
+                explanation: "Medulla (Page 41)"
+            },
+            {
+                question: "In the anterolateral pathway, where do the first-order neurons synapse with the second-order neurons?",
+                options: [
+                    "Gracile nucleus",
+                    "Dorsal horn (substantia gelatinosa) of the spinal cord",
+                    "Ventral posterolateral nucleus of the thalamus",
+                    "Dorsal column nuclei"
+                ],
+                answer: 1,
+                explanation: "Dorsal horn (substantia gelatinosa) of the spinal cord (Page 46)"
+            },
+            {
+                question: "The second-order neurons of the anterolateral pathway cross to the opposite side:",
+                options: [
+                    "In the medulla",
+                    "In the pons",
+                    "Anterior to the central canal in the spinal cord",
+                    "In the midbrain"
+                ],
+                answer: 2,
+                explanation: "Anterior to the central canal in the spinal cord (Page 47)"
+            },
+            {
+                question: "The first-order neurons in the posterior column pathway are primarily which type of nerve fiber?",
+                options: [
+                    "Aδ fibers",
+                    "C fibers",
+                    "Group la fibers",
+                    "Aβ fibers"
+                ],
+                answer: 3,
+                explanation: "Aβ fibers (Page 40)"
+            },
+            {
+                question: "The first-order neurons carrying pain and temperature sensations in the anterolateral pathway are:",
+                options: [
+                    "Aβ fibers",
+                    "Aδ or C fibers",
+                    "Group l fibers",
+                    "Aα fibers only"
+                ],
+                answer: 1,
+                explanation: "Aδ or C fibers (Page 46)"
+            },
+            {
+                question: "Which pathway has a faster conduction velocity?",
+                options: [
+                    "Anterolateral pathway",
+                    "They have the same conduction velocity",
+                    "Spinocerebellar pathway",
+                    "Posterior column pathway"
+                ],
+                answer: 3,
+                explanation: "Posterior column pathway (Page 52)"
+            },
+            {
+                question: "In the dorsal column, axons from the lower body are located:",
+                options: [
+                    "Medially",
+                    "Laterally",
+                    "Anteriorly",
+                    "Posteriorly"
+                ],
+                answer: 0,
+                explanation: "Medially (Page 51)"
+            },
+            {
+                question: "In the spinothalamic tract (anterolateral pathway), axons from the lower body are located:",
+                options: [
+                    "Laterally",
+                    "Medially",
+                    "Anteriorly",
+                    "Posteriorly"
+                ],
+                answer: 0,
+                explanation: "Laterally (Page 51)"
+            },
+            {
+                question: "Which sensation does NOT synapse in the thalamus on its way to the cortex?",
+                options: [
+                    "Touch",
+                    "Pain",
+                    "Olfaction",
+                    "Proprioception"
+                ],
+                answer: 2,
+                explanation: "Olfaction (Page 50)"
+            },
+            {
+                question: "The primary somatosensory cortex (S-I) is located in the:",
+                options: [
+                    "Precentral gyrus",
+                    "Postcentral gyrus",
+                    "Wall of the Sylvian fissure",
+                    "Frontal lobe"
+                ],
+                answer: 1,
+                explanation: "Postcentral gyrus (Page 67)"
+            },
+            {
+                question: "Brodmann's areas 3, 1, and 2 constitute the:",
+                options: [
+                    "Somatosensory association area",
+                    "Primary motor cortex",
+                    "Primary somatosensory area I (S-I)",
+                    "Somatosensory area II (S-II)"
+                ],
+                answer: 2,
+                explanation: "Primary somatosensory area I (S-I) (Page 63)"
+            },
+            {
+                question: "Which of the following statements is TRUE:",
+                options: [
+                    "The body is represented ipsilaterally in the cortex.",
+                    "The area of cortical representation is proportional to the physical size of the body part.",
+                    "The area of cortical representation is proportional to the number of sensory receptors in the body part.",
+                    "The trunk has the largest area of representation."
+                ],
+                answer: 2,
+                explanation: "The area of cortical representation is proportional to the number of sensory receptors in the body part. (Page 67)"
+            },
+            {
+                question: "Which of the following body parts has the smallest representation in the primary somatosensory cortex?",
+                options: [
+                    "Lips",
+                    "Thumb",
+                    "Tongue",
+                    "Trunk"
+                ],
+                answer: 3,
+                explanation: "Trunk (Page 64)"
+            },
+            {
+                question: "Where is the somatosensory area II (S-II) located?",
+                options: [
+                    "Precentral gyrus",
+                    "Postcentral gyrus",
+                    "Wall of the Sylvian fissure",
+                    "Occipital lobe"
+                ],
+                answer: 2,
+                explanation: "Wall of the Sylvian fissure (Page 68)"
+            },
+            {
+                question: "The ability to recognize an object, like a key, by touch alone without visual input is called:",
+                options: [
+                    "Graphesthesia",
+                    "Stereognosis",
+                    "Two-point discrimination",
+                    "Kinesthesia"
+                ],
+                answer: 1,
+                explanation: "Stereognosis (Page 70)"
+            },
+            {
+                question: "The ability to identify numbers or letters written on the skin is known as:",
+                options: [
+                    "Stereognosis",
+                    "Agraphesthesia",
+                    "Graphesthesia",
+                    "Astereognosis"
+                ],
+                answer: 2,
+                explanation: "Graphesthesia (Page 70)"
+            },
+            {
+                question: "The loss of the ability to recognize objects by touch is termed:",
+                options: [
+                    "Agraphesthesia",
+                    "Astereognosis",
+                    "Aphasia",
+                    "Ataxia"
+                ],
+                answer: 1,
+                explanation: "Astereognosis (Page 70)"
+            },
+            {
+                question: "What is the term for the brain's ability to reorganize its cortical maps in response to experience or injury?",
+                options: [
+                    "Neurogenesis",
+                    "Cortical plasticity",
+                    "Synaptic pruning",
+                    "Lateral inhibition"
+                ],
+                answer: 1,
+                explanation: "Cortical plasticity (Page 71)"
+            },
+            {
+                question: "An example of cortical plasticity is:",
+                options: [
+                    "The fixed representation of body parts in the sensory homunculus.",
+                    "Training the fingers increases their cortical representation.",
+                    "The consistent speed of nerve conduction throughout life.",
+                    "The inability of the brain to change after childhood."
+                ],
+                answer: 1,
+                explanation: "Training the fingers increases their cortical representation. (Page 71)"
+            },
+            {
+                question: "A spinal cord lesion in the dorsal column pathway would most likely result in:",
+                options: [
+                    "Loss of pain and temperature on the contralateral side",
+                    "Loss of fine touch and proprioception on the ipsilateral side",
+                    "Loss of crude touch on the contralateral side",
+                    "Loss of vibration sense on the contralateral side"
+                ],
+                answer: 1,
+                explanation: "Loss of fine touch and proprioception on the ipsilateral side (Page 52, 47)"
+            },
+            {
+                question: "Damage to the primary somatosensory cortex would lead to a loss of:",
+                options: [
+                    "Crude pain sensation",
+                    "Reflexive withdrawal from pain",
+                    "Fine, discrete localization of sensation",
+                    "All sensation from the contralateral side of the body"
+                ],
+                answer: 2,
+                explanation: "Fine, discrete localization of sensation (Page 72)"
+            },
+            {
+                question: "Following damage to the somatosensory cortex, which of the following is most likely to be preserved?",
+                options: [
+                    "Stereognosis",
+                    "Two-point discrimination",
+                    "Graphesthesia",
+                    "Crude localization of sensation"
+                ],
+                answer: 3,
+                explanation: "Crude localization of sensation (Page 72)"
+            },
+            {
+                question: "The trigeminal pathway carries sensory information from the:",
+                options: [
+                    "Lower limbs",
+                    "Upper limbs",
+                    "Face",
+                    "Trunk"
+                ],
+                answer: 2,
+                explanation: "Face (Page 56)"
+            },
+            {
+                question: "Sensory signals from the face, carried by the trigeminal nerve, enter the brainstem at the level of the:",
+                options: [
+                    "Medulla",
+                    "Pons",
+                    "Midbrain",
+                    "Spinal cord"
+                ],
+                answer: 1,
+                explanation: "Pons (Page 56)"
+            },
+            {
+                question: "All axons within a given spinal tract share a common:",
+                options: [
+                    "Origin and destination",
+                    "Diameter and conduction velocity",
+                    "Neurotransmitter and receptor type",
+                    "Myelination status and fiber type"
+                ],
+                answer: 0,
+                explanation: "Origin and destination (Page 36)"
+            },
+            {
+                question: "The medial lemniscus is a structure formed by:",
+                options: [
+                    "First-order neurons from the dorsal root ganglion",
+                    "Second-order neurons after they decussate in the medulla",
+                    "Third-order neurons projecting to the cortex",
+                    "Fibers of the anterolateral pathway"
+                ],
+                answer: 1,
+                explanation: "Second-order neurons after they decussate in the medulla (Page 41, 42)"
+            },
+            {
+                question: "In the sensory homunculus, the body is represented in the primary somatosensory cortex:",
+                options: [
+                    "Ipsilaterally and right-side up",
+                    "Bilaterally and right-side up",
+                    "Contralaterally and right-side up",
+                    "Contralaterally and upside down"
+                ],
+                answer: 3,
+                explanation: "Contralaterally and upside down (Page 67)"
+            }
+        ];
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let incorrectQuestions = [];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const reviewBtn = document.getElementById('review-btn');
+        const reviewSection = document.getElementById('review-section');
+        const incorrectQuestionsList = document.getElementById('incorrect-questions-list');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+            reviewBtn.addEventListener('click', showIncorrectQuestions);
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${String.fromCharCode(65 + question.answer)}) ${question.options[question.answer]}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                // Add to incorrect questions list
+                incorrectQuestions.push({
+                    question: quizData[currentQuestion].question,
+                    userAnswer: selectedIndex,
+                    correctAnswer: quizData[currentQuestion].answer,
+                    options: quizData[currentQuestion].options,
+                    explanation: quizData[currentQuestion].explanation,
+                    questionNumber: currentQuestion + 1
+                });
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Physiology 3 Lecture No. 3.';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+            
+            // Show review button only if there are incorrect answers
+            if (incorrectQuestions.length > 0) {
+                reviewBtn.style.display = 'inline-block';
+            } else {
+                reviewBtn.style.display = 'none';
+            }
+        }
+
+        // Show incorrect questions
+        function showIncorrectQuestions() {
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'block';
+            
+            let incorrectHTML = '';
+            incorrectQuestions.forEach((item, index) => {
+                incorrectHTML += `
+                    <div class="review-question">
+                        <div class="review-question-number">Question ${item.questionNumber}</div>
+                        <div class="review-question-text">${item.question}</div>
+                        <div>Your answer: ${String.fromCharCode(65 + item.userAnswer)}) ${item.options[item.userAnswer]}</div>
+                        <div class="review-answer review-correct">Correct answer: ${String.fromCharCode(65 + item.correctAnswer)}) ${item.options[item.correctAnswer]}</div>
+                        <div class="review-explanation">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            
+            incorrectQuestionsList.innerHTML = incorrectHTML;
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            incorrectQuestions = [];
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>

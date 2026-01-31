@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQs on Physiology 3 Lecture No. 7 Quiz</title>
+    <style>
+        :root {
+            --bg-color: #f5f7fa;
+            --container-bg: white;
+            --text-color: #333;
+            --border-color: #ddd;
+            --primary-color: #3498db;
+            --header-color: #2c3e50;
+            --secondary-text: #7f8c8d;
+            --progress-bg: #ecf0f1;
+            --question-bg: #f8f9fa;
+            --option-bg: #fff;
+            --option-hover: #f1f8ff;
+            --option-selected: #d1ecf1;
+            --correct-bg: #d4edda;
+            --correct-border: #28a745;
+            --incorrect-bg: #f8d7da;
+            --incorrect-border: #dc3545;
+            --button-bg: #3498db;
+            --button-hover: #2980b9;
+            --button-disabled: #bdc3c7;
+            --restart-bg: #2ecc71;
+            --restart-hover: #27ae60;
+            --review-bg: #f39c12;
+            --review-hover: #e67e22;
+            --toggle-bg: #ecf0f1;
+            --toggle-slider: white;
+            --toggle-text: #7f8c8d;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a2e;
+            --container-bg: #16213e;
+            --text-color: #e6e6e6;
+            --border-color: #394867;
+            --primary-color: #4cc9f0;
+            --header-color: #e6e6e6;
+            --secondary-text: #a9a9a9;
+            --progress-bg: #394867;
+            --question-bg: #1f4068;
+            --option-bg: #16213e;
+            --option-hover: #1f4068;
+            --option-selected: #1f4068;
+            --correct-bg: #2d5a2d;
+            --correct-border: #4caf50;
+            --incorrect-bg: #5a2d2d;
+            --incorrect-border: #f44336;
+            --button-bg: #4cc9f0;
+            --button-hover: #3aa8d0;
+            --button-disabled: #5d6d7e;
+            --restart-bg: #2ecc71;
+            --restart-hover: #27ae60;
+            --review-bg: #f39c12;
+            --review-hover: #e67e22;
+            --toggle-bg: #394867;
+            --toggle-slider: #4cc9f0;
+            --toggle-text: #e6e6e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            position: relative;
+        }
+        h1 {
+            color: var(--header-color);
+            margin-bottom: 5px;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+        .author {
+            color: var(--secondary-text);
+            font-style: italic;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .description {
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+            transition: color 0.3s;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 35px;
+            right: 0;
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 120px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--toggle-bg);
+            transition: .4s;
+            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--toggle-text);
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 60px;
+            left: 4px;
+            bottom: 4px;
+            background-color: var(--toggle-slider);
+            transition: .4s;
+            border-radius: 34px;
+            z-index: 1;
+        }
+        .slider-text {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .light-text, .dark-text {
+            transition: opacity 0.3s;
+        }
+        .dark-mode .light-text {
+            opacity: 0.5;
+        }
+        .light-text {
+            opacity: 0.5;
+        }
+        .dark-mode .dark-text {
+            opacity: 1;
+        }
+        .dark-text {
+            opacity: 0.5;
+        }
+        input:checked + .slider:before {
+            transform: translateX(52px);
+        }
+        .progress-container {
+            background: var(--progress-bg);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+            transition: background-color 0.3s;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--header-color);
+            transition: color 0.3s;
+        }
+        .question {
+            background: var(--question-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+        }
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: var(--option-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: var(--option-hover);
+            border-color: var(--primary-color);
+        }
+        .option.selected {
+            background: var(--option-selected);
+            border-color: var(--primary-color);
+        }
+        .option.correct {
+            background: var(--correct-bg);
+            border-color: var(--correct-border);
+        }
+        .option.incorrect {
+            background: var(--incorrect-bg);
+            border-color: var(--incorrect-border);
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: var(--correct-bg);
+            color: var(--text-color);
+            border: 1px solid var(--correct-border);
+            display: block;
+        }
+        .feedback.incorrect {
+            background: var(--incorrect-bg);
+            color: var(--text-color);
+            border: 1px solid var(--incorrect-border);
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: var(--button-hover);
+        }
+        button:disabled {
+            background: var(--button-disabled);
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--header-color);
+        }
+        .score-value {
+            font-size: 48px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--restart-bg);
+        }
+        .restart-btn:hover {
+            background: var(--restart-hover);
+        }
+        .review-btn {
+            margin-top: 20px;
+            background: var(--review-bg);
+        }
+        .review-btn:hover {
+            background: var(--review-hover);
+        }
+        .review-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--question-bg);
+            border-radius: 8px;
+            display: none;
+        }
+        .review-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--header-color);
+            text-align: center;
+        }
+        .review-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid var(--incorrect-border);
+            background: var(--container-bg);
+            border-radius: 4px;
+        }
+        .review-question-number {
+            font-weight: bold;
+            color: var(--incorrect-border);
+            margin-bottom: 8px;
+        }
+        .review-question-text {
+            margin-bottom: 10px;
+        }
+        .review-answer {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .review-correct {
+            color: var(--correct-border);
+        }
+        .review-explanation {
+            margin-top: 5px;
+            font-style: italic;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MCQs on Physiology 3 Lecture No. 7 Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Extrapyramidal System, Basal Ganglia, and Motor Control</p>
+            <div class="theme-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <span class="slider">
+                        <div class="slider-text">
+                            <span class="light-text">Light</span>
+                            <span class="dark-text">Dark</span>
+                        </div>
+                    </span>
+                </label>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">50</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">50</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/50</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+            <button class="review-btn" id="review-btn">Review Incorrect Answers</button>
+        </div>
+
+        <div id="review-section" class="review-section">
+            <h2 class="review-title">Questions Answered Incorrectly</h2>
+            <div id="incorrect-questions-list"></div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data from Physiology 3 Lecture No. 7
+        const originalQuizData = [
+            {
+                question: "Extrapyramidal pathways primarily convey information from which of the following brainstem nuclei?",
+                options: [
+                    "Thalamic nuclei",
+                    "Red nucleus, superior colliculus, vestibular nucleus, and motor nuclei of the reticular formation",
+                    "Hypothalamic nuclei",
+                    "Nuclei of the solitary tract"
+                ],
+                answer: 1,
+                explanation: "Red nucleus, superior colliculus, vestibular nucleus, and motor nuclei of the reticular formation (Page 42)"
+            },
+            {
+                question: "The main functions of the extrapyramidal system are related to:",
+                options: [
+                    "Fine, precise movements of the fingers.",
+                    "Conscious planning of movement.",
+                    "Muscle tone, posture, and equilibrium.",
+                    "Visual processing and eye movements."
+                ],
+                answer: 2,
+                explanation: "Muscle tone, posture, and equilibrium (Page 42)"
+            },
+            {
+                question: "Which of the following is a function of the extrapyramidal system?",
+                options: [
+                    "It is the primary pathway for conscious voluntary movement.",
+                    "It controls axial and proximal limb muscles for gross movements.",
+                    "It initiates all reflex movements.",
+                    "It is responsible for detailed sensory discrimination."
+                ],
+                answer: 1,
+                explanation: "It controls axial and proximal limb muscles for gross movements. (Page 44)"
+            },
+            {
+                question: "The extrapyramidal system exerts a powerful inhibitory effect on:",
+                options: [
+                    "Upper motor neurons in the primary motor cortex.",
+                    "Sensory neurons in the dorsal root ganglia.",
+                    "Gamma motor neurons and muscle tone.",
+                    "Purkinje cells in the cerebellum."
+                ],
+                answer: 2,
+                explanation: "Gamma motor neurons and muscle tone. (Page 44)"
+            },
+            {
+                question: "Which of the following is NOT a role of the brainstem in motor control?",
+                options: [
+                    "Control of equilibrium",
+                    "Control of eye movements",
+                    "Control of many stereotyped movements",
+                    "Primary initiation of conscious voluntary movement"
+                ],
+                answer: 3,
+                explanation: "Primary initiation of conscious voluntary movement (Page 45)"
+            },
+            {
+                question: "The pontine reticular nuclei receive excitatory signals primarily from:",
+                options: [
+                    "The cerebellum",
+                    "The vestibular nuclei",
+                    "The thalamus",
+                    "The primary motor cortex"
+                ],
+                answer: 1,
+                explanation: "The vestibular nuclei (Page 47)"
+            },
+            {
+                question: "The pontine reticulospinal tract provides:",
+                options: [
+                    "Inhibitory stimulus to antigravity muscles.",
+                    "Excitatory stimulus to antigravity muscles.",
+                    "Excitatory stimulus to distal limb flexors.",
+                    "Inhibitory stimulus to respiratory muscles."
+                ],
+                answer: 1,
+                explanation: "Excitatory stimulus to antigravity muscles. (Page 47)"
+            },
+            {
+                question: "The medullary reticular nuclei receive input from which pathways?",
+                options: [
+                    "Only from the cerebellum",
+                    "Corticospinal tract, rubrospinal tract, and other motor pathways",
+                    "Exclusively from sensory pathways",
+                    "From the limbic system only"
+                ],
+                answer: 1,
+                explanation: "Corticospinal tract, rubrospinal tract, and other motor pathways (Page 48)"
+            },
+            {
+                question: "The medullary reticulospinal tract primarily provides:",
+                options: [
+                    "Excitatory stimulus to flexor muscles.",
+                    "Inhibitory stimulus to antigravity muscles.",
+                    "Excitatory stimulus to distal muscles.",
+                    "Inhibitory stimulus to facial muscles."
+                ],
+                answer: 1,
+                explanation: "Inhibitory stimulus to antigravity muscles. (Page 48)"
+            },
+            {
+                question: "Components of the medial descending pathways primarily help control:",
+                options: [
+                    "Distal limb muscles for precise movements.",
+                    "Gross movements of the trunk and proximal limb muscles.",
+                    "Ocular muscles for eye movements.",
+                    "Muscles of facial expression."
+                ],
+                answer: 1,
+                explanation: "Gross movements of the trunk and proximal limb muscles. (Page 49)"
+            },
+            {
+                question: "Components of the lateral descending pathways primarily help control:",
+                options: [
+                    "Posture and balance.",
+                    "Distal limb muscles for precise movements.",
+                    "Axial muscles for stability.",
+                    "Respiratory muscles."
+                ],
+                answer: 1,
+                explanation: "Distal limb muscles for precise movements. (Page 49)"
+            },
+            {
+                question: "A somatic motor pathway involves at least how many motor neurons?",
+                options: [
+                    "One",
+                    "Two",
+                    "Three",
+                    "Four"
+                ],
+                answer: 1,
+                explanation: "Two (Page 50)"
+            },
+            {
+                question: "The cell body of an upper motor neuron is located in:",
+                options: [
+                    "A nucleus of the brain stem or spinal cord.",
+                    "A CNS processing center (e.g., cerebral cortex or brainstem).",
+                    "The dorsal root ganglion.",
+                    "The autonomic ganglion."
+                ],
+                answer: 1,
+                explanation: "A CNS processing center (e.g., cerebral cortex or brainstem). (Page 50)"
+            },
+            {
+                question: "The cell body of a lower motor neuron is located in:",
+                options: [
+                    "The cerebral cortex.",
+                    "The thalamus.",
+                    "A nucleus of the brain stem or spinal cord.",
+                    "The cerebellum."
+                ],
+                answer: 2,
+                explanation: "A nucleus of the brain stem or spinal cord. (Page 50)"
+            },
+            {
+                question: "Which of the following statements about lower motor neurons is TRUE?",
+                options: [
+                    "Their axons synapse directly on skeletal muscle fibers.",
+                    "They are located entirely within the CNS.",
+                    "Damage to them does not affect reflex control.",
+                    "They are only involved in involuntary movements."
+                ],
+                answer: 0,
+                explanation: "Their axons synapse directly on skeletal muscle fibers. (Page 51)"
+            },
+            {
+                question: "Destruction of a lower motor neuron results in:",
+                options: [
+                    "Spastic paralysis with hyperreflexia.",
+                    "Loss of voluntary and reflex control over the innervated motor unit.",
+                    "Increased muscle tone (rigidity).",
+                    "The appearance of a positive Babinski sign."
+                ],
+                answer: 1,
+                explanation: "Loss of voluntary and reflex control over the innervated motor unit. (Page 51)"
+            },
+            {
+                question: "A positive Babinski sign (dorsiflexion of the big toe) in an adult is indicative of:",
+                options: [
+                    "A healthy nervous system.",
+                    "A lower motor neuron lesion.",
+                    "An upper motor neuron lesion.",
+                    "Cerebellar dysfunction."
+                ],
+                answer: 2,
+                explanation: "An upper motor neuron lesion. (Pages 54, 58)"
+            },
+            {
+                question: "Decerebrate rigidity results from a lesion at the level of the:",
+                options: [
+                    "Spinal cord.",
+                    "Midbrain (mesencephalon).",
+                    "Medulla oblongata.",
+                    "Cerebral cortex."
+                ],
+                answer: 1,
+                explanation: "Midbrain (mesencephalon). (Page 59)"
+            },
+            {
+                question: "The posture in decerebrate rigidity is characterized by:",
+                options: [
+                    "Flaccid paralysis of all limbs.",
+                    "Flexion of the upper limbs and extension of the lower limbs.",
+                    "Extension and outward rotation of the upper extremities and plantar flexion of the feet.",
+                    "Opisthotonos (arching of the back) only."
+                ],
+                answer: 2,
+                explanation: "Extension and outward rotation of the upper extremities and plantar flexion of the feet. (Page 59)"
+            },
+            {
+                question: "Clasp-knife rigidity is typically associated with:",
+                options: [
+                    "Parkinson's disease.",
+                    "Upper motor neuron lesions or decerebrate rigidity.",
+                    "Cerebellar lesions.",
+                    "Myasthenia gravis."
+                ],
+                answer: 1,
+                explanation: "Upper motor neuron lesions or decerebrate rigidity. (Page 60)"
+            },
+            {
+                question: "Lead-pipe or cogwheel rigidity is characteristically seen in:",
+                options: [
+                    "Spasticity from a stroke.",
+                    "Parkinsonism.",
+                    "Spinal shock.",
+                    "Huntington's disease."
+                ],
+                answer: 1,
+                explanation: "Parkinsonism. (Page 60)"
+            },
+            {
+                question: "Clonus is defined as:",
+                options: [
+                    "A sustained muscle contraction.",
+                    "A complete lack of muscle tone.",
+                    "Involuntary writhing movements.",
+                    "Alternating rhythmic contractions and relaxations of a muscle in response to sudden maintained stretch."
+                ],
+                answer: 3,
+                explanation: "Alternating rhythmic contractions and relaxations of a muscle in response to sudden maintained stretch. (Page 61)"
+            },
+            {
+                question: "Clonus is commonly seen in:",
+                options: [
+                    "Lower motor neuron lesions.",
+                    "Muscle diseases.",
+                    "Upper motor neuron lesions.",
+                    "Peripheral neuropathies."
+                ],
+                answer: 2,
+                explanation: "Upper motor neuron lesions. (Page 61)"
+            },
+            {
+                question: "The collective term for the caudate nucleus and putamen is the:",
+                options: [
+                    "Lenticular nucleus.",
+                    "Striatum.",
+                    "Corpus striatum.",
+                    "Pallidum."
+                ],
+                answer: 1,
+                explanation: "Striatum. (Page 69)"
+            },
+            {
+                question: "The collective term for the putamen and globus pallidus is the:",
+                options: [
+                    "Striatum.",
+                    "Lenticular nucleus.",
+                    "Subthalamic nucleus.",
+                    "Substantia nigra."
+                ],
+                answer: 1,
+                explanation: "Lenticular nucleus. (Page 69)"
+            },
+            {
+                question: "Functionally related nuclei of the basal ganglia include the:",
+                options: [
+                    "Red nucleus and superior colliculus.",
+                    "Subthalamic nucleus and substantia nigra.",
+                    "Ventral posterolateral nucleus and medial geniculate body.",
+                    "Amygdala and cingulate gyrus."
+                ],
+                answer: 1,
+                explanation: "Subthalamic nucleus and substantia nigra. (Page 69)"
+            },
+            {
+                question: "The primary role of the basal ganglia is to:",
+                options: [
+                    "Process somatosensory information.",
+                    "Function as an accessory motor system in close association with the cerebral cortex.",
+                    "Control autonomic functions like heart rate.",
+                    "Initiate all voluntary movements independently."
+                ],
+                answer: 1,
+                explanation: "Function as an accessory motor system in close association with the cerebral cortex. (Page 72)"
+            },
+            {
+                question: "The putamen circuit is primarily responsible for:",
+                options: [
+                    "Executing learned patterns of movement subconsciously.",
+                    "Cognitive planning of movement sequences.",
+                    "Regulating emotional responses.",
+                    "Controlling eye movements."
+                ],
+                answer: 0,
+                explanation: "Executing learned patterns of movement subconsciously. (Page 74)"
+            },
+            {
+                question: "The caudate circuit is primarily involved in:",
+                options: [
+                    "Reflexive postural adjustments.",
+                    "Cognitive control of sequences of motor patterns and scaling movement intensity.",
+                    "Directly inhibiting lower motor neurons.",
+                    "Processing visual feedback for movement."
+                ],
+                answer: 1,
+                explanation: "Cognitive control of sequences of motor patterns and scaling movement intensity. (Page 76)"
+            },
+            {
+                question: "Which neurotransmitter is inhibitory and is released from the substantia nigra to the striatum?",
+                options: [
+                    "Acetylcholine (ACh)",
+                    "Dopamine",
+                    "GABA",
+                    "Glutamate"
+                ],
+                answer: 1,
+                explanation: "Dopamine (Page 77)"
+            },
+            {
+                question: "Which neurotransmitter is excitatory and is released from the cortex to the putamen and caudate?",
+                options: [
+                    "GABA",
+                    "Dopamine",
+                    "Acetylcholine (ACh)",
+                    "Glycine"
+                ],
+                answer: 2,
+                explanation: "Acetylcholine (ACh) (Page 77)"
+            },
+            {
+                question: "A key function of the basal ganglia is to help the corticospinal system execute:",
+                options: [
+                    "Rapid ballistic movements like a kick.",
+                    "Respiratory rhythms.",
+                    "Slow, sustained movements like writing.",
+                    "Pupillary light reflexes."
+                ],
+                answer: 2,
+                explanation: "Slow, sustained movements like writing. (Page 78)"
+            },
+            {
+                question: "The basal ganglia are important for:",
+                options: [
+                    "The sense of touch.",
+                    "Planning and programming of movements with the supplementary motor cortex and cerebellum.",
+                    "Primary visual perception.",
+                    "Long-term memory formation."
+                ],
+                answer: 1,
+                explanation: "Planning and programming of movements with the supplementary motor cortex and cerebellum. (Page 79)"
+            },
+            {
+                question: "The globus pallidus is responsible for:",
+                options: [
+                    "Releasing dopamine.",
+                    "Assuming the posture of the body for a particular voluntary movement.",
+                    "Initiating rapid eye movements (saccades).",
+                    "Inhibiting the thalamus exclusively."
+                ],
+                answer: 1,
+                explanation: "Assuming the posture of the body for a particular voluntary movement. (Page 80)"
+            },
+            {
+                question: "Parkinson's disease is primarily associated with the loss of which neurons?",
+                options: [
+                    "GABAergic neurons in the striatum.",
+                    "Cholinergic neurons in the cortex.",
+                    "Dopaminergic neurons in the substantia nigra.",
+                    "Glutamatergic neurons in the subthalamic nucleus."
+                ],
+                answer: 2,
+                explanation: "Dopaminergic neurons in the substantia nigra. (Page 82)"
+            },
+            {
+                question: "The classic triad of symptoms in Parkinsonism includes:",
+                options: [
+                    "Akinesia, rigidity, and tremors.",
+                    "Chorea, athetosis, and hemiballismus.",
+                    "Spasticity, hyperreflexia, and clonus.",
+                    "Ataxia, nystagmus, and dysmetria."
+                ],
+                answer: 0,
+                explanation: "Akinesia, rigidity, and tremors. (Page 81)"
+            },
+            {
+                question: "Huntington's disease (chorea) is associated with degeneration of the:",
+                options: [
+                    "Substantia nigra.",
+                    "Striatum (caudate and putamen).",
+                    "Globus pallidus.",
+                    "Subthalamic nucleus."
+                ],
+                answer: 1,
+                explanation: "Striatum (caudate and putamen). (Page 84)"
+            },
+            {
+                question: "Hemiballismus is typically caused by a lesion in the:",
+                options: [
+                    "Caudate nucleus.",
+                    "Putamen.",
+                    "Subthalamic nucleus.",
+                    "Substantia nigra pars compacta."
+                ],
+                answer: 2,
+                explanation: "Subthalamic nucleus. (Pages 81, 85)"
+            },
+            {
+                question: "Athetosis (writhing movements) is typically caused by lesions in the:",
+                options: [
+                    "Cerebellum.",
+                    "Globus pallidus.",
+                    "Motor cortex.",
+                    "Spinal cord."
+                ],
+                answer: 1,
+                explanation: "Globus pallidus. (Pages 81, 85)"
+            },
+            {
+                question: "A common pharmacological treatment for Parkinson's disease involves:",
+                options: [
+                    "Blocking dopamine receptors.",
+                    "Replacing dopamine with its precursor L-DOPA.",
+                    "Increasing acetylcholine activity.",
+                    "Administering GABA agonists."
+                ],
+                answer: 1,
+                explanation: "Replacing dopamine with its precursor L-DOPA. (Page 82)"
+            },
+            {
+                question: "Which of the following is an inhibitory neurotransmitter released from the striatum to the globus pallidus and substantia nigra?",
+                options: [
+                    "Glutamate",
+                    "Acetylcholine",
+                    "GABA",
+                    "Dopamine"
+                ],
+                answer: 2,
+                explanation: "GABA (Page 77)"
+            },
+            {
+                question: "The balance between the outputs of which two systems allows for smooth, coordinated movement?",
+                options: [
+                    "The limbic system and the hypothalamus",
+                    "The basal ganglia and the cerebellum",
+                    "The sympathetic and parasympathetic systems",
+                    "The dorsal column-medial lemniscus and spinothalamic tracts"
+                ],
+                answer: 1,
+                explanation: "The basal ganglia and the cerebellum (Page 66)"
+            },
+            {
+                question: "The output from the cerebellum to the thalamus is:",
+                options: [
+                    "Exclusively excitatory.",
+                    "Exclusively inhibitory.",
+                    "Both excitatory and inhibitory.",
+                    "Neither; it does not project to the thalamus."
+                ],
+                answer: 2,
+                explanation: "Both excitatory and inhibitory. (Page 66)"
+            },
+            {
+                question: "The output from the basal ganglia to the thalamus is primarily:",
+                options: [
+                    "Inhibitory.",
+                    "Excitatory.",
+                    "Modulatory (both).",
+                    "Absent; they project directly to the spinal cord."
+                ],
+                answer: 0,
+                explanation: "Inhibitory. (Page 66)"
+            },
+            {
+                question: "Which brainstem structure, when overactive along with the pontine excitatory system, contributes to decerebrate rigidity?",
+                options: [
+                    "Red nucleus",
+                    "Vestibular nuclei",
+                    "Inferior olivary nucleus",
+                    "Nucleus ambiguus"
+                ],
+                answer: 1,
+                explanation: "Vestibular nuclei (Page 59)"
+            },
+            {
+                question: "In the context of motor control, the term 'gamma rigidity' refers to stiffness resulting from increased activity of:",
+                options: [
+                    "Alpha motor neurons only.",
+                    "Gamma motor neurons, affecting muscle spindle sensitivity.",
+                    "Upper motor neurons in the cortex.",
+                    "Sensory neurons in the dorsal horn."
+                ],
+                answer: 1,
+                explanation: "Gamma motor neurons, affecting muscle spindle sensitivity. (Page 60)"
+            },
+            {
+                question: "A 'supra-spinal facilitator' of motor activity includes which of the following?",
+                options: [
+                    "Medullary inhibitory reticular formation",
+                    "Paleocerebellum",
+                    "Red nucleus (Extrapyramidal)",
+                    "Primary motor area 4"
+                ],
+                answer: 3,
+                explanation: "Primary motor area 4 (Page 52)"
+            },
+            {
+                question: "A 'supra-spinal inhibitor' of motor activity includes which of the following?",
+                options: [
+                    "Pontine reticular formation",
+                    "Vestibular nucleus of basal ganglia",
+                    "Neocerebellum",
+                    "Lentiform nucleus of the Basal Ganglia"
+                ],
+                answer: 3,
+                explanation: "Lentiform nucleus of the Basal Ganglia (Page 52)"
+            },
+            {
+                question: "The final common pathway for all motor output to skeletal muscle is the:",
+                options: [
+                    "Upper motor neuron.",
+                    "Lower motor neuron.",
+                    "Interneuron.",
+                    "Pyramidal cell in layer V of the cortex."
+                ],
+                answer: 1,
+                explanation: "Lower motor neuron. (Pages 50-51)"
+            },
+            {
+                question: "Which structure is responsible for storing programs of learned motor patterns for subconscious execution?",
+                options: [
+                    "The putamen circuit",
+                    "The hippocampus",
+                    "The primary visual cortex",
+                    "The medulla oblongata"
+                ],
+                answer: 0,
+                explanation: "The putamen circuit (Page 74)"
+            }
+        ];
+
+        // Function to shuffle an array (Fisher-Yates algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Function to create a randomized version of the quiz data
+        function createRandomizedQuizData() {
+            const randomizedData = [];
+            
+            originalQuizData.forEach(question => {
+                // Create a copy of the original question
+                const randomizedQuestion = {
+                    question: question.question,
+                    options: [...question.options], // Copy options array
+                    originalAnswer: question.answer, // Store original answer index
+                    explanation: question.explanation
+                };
+                
+                // Create an array of indices [0, 1, 2, 3]
+                const indices = [0, 1, 2, 3];
+                
+                // Shuffle the indices
+                shuffleArray(indices);
+                
+                // Create a new options array with shuffled order
+                const shuffledOptions = indices.map(index => question.options[index]);
+                
+                // Find the new position of the correct answer
+                const newAnswerIndex = indices.indexOf(question.answer);
+                
+                // Update the question with shuffled options and new answer
+                randomizedQuestion.options = shuffledOptions;
+                randomizedQuestion.answer = newAnswerIndex;
+                
+                randomizedData.push(randomizedQuestion);
+            });
+            
+            return randomizedData;
+        }
+
+        // Create randomized quiz data
+        let quizData = createRandomizedQuizData();
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let incorrectQuestions = [];
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+        const reviewBtn = document.getElementById('review-btn');
+        const reviewSection = document.getElementById('review-section');
+        const incorrectQuestionsList = document.getElementById('incorrect-questions-list');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const lightText = document.querySelector('.light-text');
+        const darkText = document.querySelector('.dark-text');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Initialize dark mode based on system preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.checked = true;
+                updateToggleText(true);
+            } else {
+                updateToggleText(false);
+            }
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+            reviewBtn.addEventListener('click', showIncorrectQuestions);
+            darkModeToggle.addEventListener('change', toggleDarkMode);
+        }
+
+        // Toggle dark mode
+        function toggleDarkMode() {
+            const isDarkMode = darkModeToggle.checked;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            updateToggleText(isDarkMode);
+        }
+
+        // Update toggle text opacity
+        function updateToggleText(isDarkMode) {
+            if (isDarkMode) {
+                lightText.style.opacity = '0.5';
+                darkText.style.opacity = '1';
+            } else {
+                lightText.style.opacity = '1';
+                darkText.style.opacity = '0.5';
+            }
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                const correctLetter = String.fromCharCode(65 + question.answer);
+                const correctAnswerText = question.options[question.answer];
+                
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${correctLetter}) ${correctAnswerText}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            } else {
+                // Add to incorrect questions list
+                incorrectQuestions.push({
+                    question: quizData[currentQuestion].question,
+                    userAnswer: selectedIndex,
+                    correctAnswer: quizData[currentQuestion].answer,
+                    options: quizData[currentQuestion].options,
+                    explanation: quizData[currentQuestion].explanation,
+                    questionNumber: currentQuestion + 1
+                });
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Physiology 3 concepts.';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+            
+            // Show review button only if there are incorrect answers
+            if (incorrectQuestions.length > 0) {
+                reviewBtn.style.display = 'inline-block';
+            } else {
+                reviewBtn.style.display = 'none';
+            }
+        }
+
+        // Show incorrect questions
+        function showIncorrectQuestions() {
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'block';
+            
+            let incorrectHTML = '';
+            incorrectQuestions.forEach((item, index) => {
+                const correctLetter = String.fromCharCode(65 + item.correctAnswer);
+                const userLetter = String.fromCharCode(65 + item.userAnswer);
+                
+                incorrectHTML += `
+                    <div class="review-question">
+                        <div class="review-question-number">Question ${item.questionNumber}</div>
+                        <div class="review-question-text">${item.question}</div>
+                        <div>Your answer: ${userLetter}) ${item.options[item.userAnswer]}</div>
+                        <div class="review-answer review-correct">Correct answer: ${correctLetter}) ${item.options[item.correctAnswer]}</div>
+                        <div class="review-explanation">${item.explanation}</div>
+                    </div>
+                `;
+            });
+            
+            incorrectQuestionsList.innerHTML = incorrectHTML;
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            incorrectQuestions = [];
+            
+            // Re-randomize the quiz data when restarting
+            quizData = createRandomizedQuizData();
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            reviewSection.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>

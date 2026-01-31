@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physiology 3 Lecture No. 2 MCQs Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #3498db;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .author {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .progress-container {
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+            height: 10px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #3498db;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .question-number {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: grid;
+            grid-gap: 10px;
+        }
+        .option {
+            padding: 12px 15px;
+            background: #fff;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            background: #f1f8ff;
+            border-color: #a3d0fd;
+        }
+        .option.selected {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+        }
+        .option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        .option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .results {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        .score {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .score-value {
+            font-size: 48px;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: #2ecc71;
+        }
+        .restart-btn:hover {
+            background: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Physiology 3 Lecture No. 2 MCQs Quiz</h1>
+            <p class="author">Dr. Samy Salem</p>
+            <p class="description">Test your knowledge of Physiology 3 Lecture No. 2</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <div class="stats">
+            <div>Question: <span id="current-question">1</span>/<span id="total-questions">30</span></div>
+            <div>Score: <span id="score">0</span>/<span id="total-score">30</span></div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" disabled>Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div id="results" class="results">
+            <div class="score">Your Score: <span class="score-value" id="final-score">0</span>/30</div>
+            <p id="performance-message"></p>
+            <button class="restart-btn" id="restart-btn">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "What is the primary function of a sensory receptor?",
+                options: [
+                    "To transmit action potentials to the brain",
+                    "To process information in the cerebral cortex",
+                    "To detect stimuli and transduce energy into an electrical signal",
+                    "To initiate motor responses"
+                ],
+                answer: 2,
+                explanation: "To detect stimuli and transduce energy into an electrical signal (Page 5)"
+            },
+            {
+                question: "Which of the following is classified as a mechanoreceptor?",
+                options: [
+                    "Thermoreceptor",
+                    "Nociceptor",
+                    "Chemoreceptor",
+                    "Touch receptor"
+                ],
+                answer: 3,
+                explanation: "Touch receptor (Page 6)"
+            },
+            {
+                question: "Receptors that respond to stimuli from the external environment are called:",
+                options: [
+                    "Interoreceptors",
+                    "Exteroreceptors",
+                    "Proprioceptors",
+                    "Baroreceptors"
+                ],
+                answer: 1,
+                explanation: "Exteroreceptors (Page 6)"
+            },
+            {
+                question: "The change in transmembrane potential of a receptor cell when stimulated is called the:",
+                options: [
+                    "Action potential",
+                    "Generator potential",
+                    "Receptor potential",
+                    "Synaptic potential"
+                ],
+                answer: 2,
+                explanation: "Receptor potential (Page 7)"
+            },
+            {
+                question: "A receptor potential large enough to produce an action potential in the afferent neuron is called a:",
+                options: [
+                    "Threshold potential",
+                    "Generator potential",
+                    "Synaptic potential",
+                    "Resting potential"
+                ],
+                answer: 1,
+                explanation: "Generator potential (Page 7)"
+            },
+            {
+                question: "In somatosensory receptors, the detector is often a:",
+                options: [
+                    "G-protein coupled receptor",
+                    "Metabotropic receptor",
+                    "Mechanically sensitive ion channel",
+                    "Voltage-gated calcium channel"
+                ],
+                answer: 2,
+                explanation: "Mechanically sensitive ion channel (Page 9)"
+            },
+            {
+                question: "The specific form of energy to which a receptor responds most readily is its:",
+                options: [
+                    "Inadequate stimulus",
+                    "Generator potential",
+                    "Adequate stimulus",
+                    "Action potential threshold"
+                ],
+                answer: 2,
+                explanation: "Adequate stimulus (Page 11)"
+            },
+            {
+                question: "The reduction in sensitivity of a receptor in the presence of a constant stimulus is known as:",
+                options: [
+                    "Transduction",
+                    "Projection",
+                    "Adaptation",
+                    "Potentiation"
+                ],
+                answer: 2,
+                explanation: "Adaptation (Page 13)"
+            },
+            {
+                question: "Which type of receptor adapts slowly or not at all?",
+                options: [
+                    "Tonic receptors",
+                    "Phasic receptors",
+                    "Rapidly adapting receptors",
+                    "Moderately adapting receptors"
+                ],
+                answer: 0,
+                explanation: "Tonic receptors (Page 14)"
+            },
+            {
+                question: "Pain receptors are classified as:",
+                options: [
+                    "Phasic receptors",
+                    "Rapidly adapting receptors",
+                    "Tonic receptors",
+                    "Moderately adapting receptors"
+                ],
+                answer: 2,
+                explanation: "Tonic receptors (Page 14)"
+            },
+            {
+                question: "Which of the following is an example of a rapidly adapting receptor?",
+                options: [
+                    "Muscle spindle",
+                    "Baroreceptor",
+                    "Pain receptor",
+                    "Pacinian corpuscle"
+                ],
+                answer: 3,
+                explanation: "Pacinian corpuscle (Page 15)"
+            },
+            {
+                question: "The translation of sensory information into meaningful patterns of action potentials is called:",
+                options: [
+                    "Sensory transduction",
+                    "Sensory adaptation",
+                    "Sensory projection",
+                    "Sensory coding"
+                ],
+                answer: 3,
+                explanation: "Sensory coding (Page 16)"
+            },
+            {
+                question: "According to the Law of Specific Nerve Energies (Muller's Doctrine), the sensation evoked depends on:",
+                options: [
+                    "The intensity of the stimulus",
+                    "The location of the stimulus in the brain",
+                    "The duration of the stimulus",
+                    "The specific receptor type and pathway stimulated"
+                ],
+                answer: 3,
+                explanation: "The specific receptor type and pathway stimulated (Page 19)"
+            },
+            {
+                question: "The Law of Projection explains why:",
+                options: [
+                    "Sensations are perceived as originating from the site of the receptor",
+                    "Stronger stimuli activate more receptors",
+                    "Receptors adapt to constant stimuli",
+                    "Each receptor has a specific adequate stimulus"
+                ],
+                answer: 0,
+                explanation: "Sensations are perceived as originating from the site of the receptor (Page 20)"
+            },
+            {
+                question: "The intensity of a stimulus is coded by:",
+                options: [
+                    "The type of receptor activated",
+                    "The specific pathway to the cortex",
+                    "The frequency of action potentials and the number of receptors activated",
+                    "The size of the receptor potential only"
+                ],
+                answer: 2,
+                explanation: "The frequency of action potentials and the number of receptors activated (Page 21, 27)"
+            },
+            {
+                question: "A 'sensory unit' is defined as:",
+                options: [
+                    "A single receptor cell",
+                    "A single sensory axon and all its peripheral branches",
+                    "A group of different receptor types in one area",
+                    "The area of the somatosensory cortex for one body part"
+                ],
+                answer: 1,
+                explanation: "A single sensory axon and all its peripheral branches (Page 23)"
+            },
+            {
+                question: "The 'receptive field' of a sensory neuron is:",
+                options: [
+                    "The area of the cortex that processes its input",
+                    "The area in the periphery from which a stimulus can influence its firing",
+                    "The type of stimulus to which it responds",
+                    "The central pathway it follows"
+                ],
+                answer: 1,
+                explanation: "The area in the periphery from which a stimulus can influence its firing (Page 23, 25)"
+            },
+            {
+                question: "Greater spatial resolution (precision) is associated with:",
+                options: [
+                    "Larger receptive fields and lower receptor density",
+                    "Larger receptive fields and higher receptor density",
+                    "Smaller receptive fields and lower receptor density",
+                    "Smaller receptive fields and higher receptor density"
+                ],
+                answer: 3,
+                explanation: "Smaller receptive fields and higher receptor density (Page 22, 25)"
+            },
+            {
+                question: "The 'two-point discrimination test' is used to assess:",
+                options: [
+                    "Pain sensitivity",
+                    "Thermal sensation",
+                    "Spatial resolution of receptive fields",
+                    "Receptor adaptation rate"
+                ],
+                answer: 2,
+                explanation: "Spatial resolution of receptive fields (Page 25)"
+            },
+            {
+                question: "A dermatome is:",
+                options: [
+                    "A type of sensory receptor",
+                    "An area of skin innervated by sensory fibers from a single dorsal root",
+                    "The receptive field of a single sensory neuron",
+                    "A pathway in the spinal cord"
+                ],
+                answer: 1,
+                explanation: "An area of skin innervated by sensory fibers from a single dorsal root (Page 26)"
+            },
+            {
+                question: "Which property of receptors states that stimulating a pathway anywhere will produce the sensation specific to its receptor type?",
+                options: [
+                    "Excitability",
+                    "Law of Projection",
+                    "Law of Specific Nerve Energy",
+                    "Adaptation"
+                ],
+                answer: 2,
+                explanation: "Law of Specific Nerve Energy (Page 29)"
+            },
+            {
+                question: "Which property explains the 'phantom limb' phenomenon?",
+                options: [
+                    "Modality discrimination",
+                    "Locality discrimination (Law of Projection)",
+                    "Intensity discrimination",
+                    "Receptor specificity"
+                ],
+                answer: 1,
+                explanation: "Locality discrimination (Law of Projection) (Page 29)"
+            },
+            {
+                question: "Sensations like touch, pain, and temperature are classified as:",
+                options: [
+                    "Deep sensations",
+                    "Visceral sensations",
+                    "Proprioceptive sensations",
+                    "Superficial sensations"
+                ],
+                answer: 3,
+                explanation: "Superficial sensations (Page 32)"
+            },
+            {
+                question: "Proprioception is classified as a:",
+                options: [
+                    "Superficial sensation",
+                    "Deep sensation",
+                    "Combined sensation",
+                    "Visceral sensation"
+                ],
+                answer: 1,
+                explanation: "Deep sensation (Page 32)"
+            },
+            {
+                question: "Which of the following is a mechanoreceptive sensation?",
+                options: [
+                    "Heat",
+                    "Cold",
+                    "Pain",
+                    "Vibration"
+                ],
+                answer: 3,
+                explanation: "Vibration (Page 33)"
+            },
+            {
+                question: "Cell bodies of sensory neurons are located in the:",
+                options: [
+                    "Anterior gray horn",
+                    "Lateral gray horn",
+                    "Dorsal root ganglion",
+                    "Ventral root"
+                ],
+                answer: 2,
+                explanation: "Dorsal root ganglion (Page 35)"
+            },
+            {
+                question: "Which of the following is NOT one of the three major somatic sensory pathways?",
+                options: [
+                    "The corticospinal pathway",
+                    "The posterior column pathway",
+                    "The anterolateral pathway",
+                    "The spinocerebellar pathway"
+                ],
+                answer: 0,
+                explanation: "The corticospinal pathway (Page 36)"
+            },
+            {
+                question: "The 'Type of Stimulus (modality)' is distinguished by:",
+                options: [
+                    "The frequency of action potentials",
+                    "The number of receptors activated",
+                    "The type of receptor activated and the specific pathway to the cortex",
+                    "The location of the activated receptive field"
+                ],
+                answer: 2,
+                explanation: "The type of receptor activated and the specific pathway to the cortex (Page 27)"
+            },
+            {
+                question: "The link between a peripheral receptor and a cortical neuron, carrying information about one type of stimulus, is called a:",
+                options: [
+                    "Receptive field",
+                    "Dermatome",
+                    "Labeled line",
+                    "Sensory unit"
+                ],
+                answer: 2,
+                explanation: "Labeled line (Page 18)"
+            },
+            {
+                question: "The property of excitability in receptors involves the generation of a local potential called the ______, which can lead to an ______ in the associated nerve fiber.",
+                options: [
+                    "Receptor potential / action potential",
+                    "Synaptic potential / receptor potential",
+                    "Action potential / generator potential",
+                    "None of the above"
+                ],
+                answer: 0,
+                explanation: "Receptor potential / action potential (Page 28)"
+            }
+        ];
+
+        // Quiz state variables
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // DOM elements
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQuestionEl = document.getElementById('current-question');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const scoreEl = document.getElementById('score');
+        const totalScoreEl = document.getElementById('total-score');
+        const resultsContainer = document.getElementById('results');
+        const finalScoreEl = document.getElementById('final-score');
+        const performanceMessageEl = document.getElementById('performance-message');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Initialize quiz
+        function initQuiz() {
+            totalQuestionsEl.textContent = quizData.length;
+            totalScoreEl.textContent = quizData.length;
+            showQuestion();
+            updateProgressBar();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+        }
+
+        // Show current question
+        function showQuestion() {
+            currentQuestionEl.textContent = currentQuestion + 1;
+            scoreEl.textContent = score;
+            
+            const question = quizData[currentQuestion];
+            let optionsHTML = '';
+            
+            question.options.forEach((option, index) => {
+                let optionClass = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionClass += ' selected';
+                    if (index === question.answer) {
+                        optionClass += ' correct';
+                    } else {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${index}">
+                        ${String.fromCharCode(65 + index)}) ${option}
+                    </div>
+                `;
+            });
+            
+            let feedbackHTML = '';
+            if (userAnswers[currentQuestion] !== null) {
+                const isCorrect = userAnswers[currentQuestion] === question.answer;
+                feedbackHTML = `
+                    <div class="feedback ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${isCorrect ? '✓ Correct!' : '✗ Incorrect!'} 
+                        ${!isCorrect ? `Correct answer: ${String.fromCharCode(65 + question.answer)}) ${question.options[question.answer]}` : ''}
+                        <br><br>Explanation: ${question.explanation}
+                    </div>
+                `;
+            }
+            
+            quizContainer.innerHTML = `
+                <div class="question">
+                    <div class="question-number">Question ${currentQuestion + 1}/${quizData.length}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">${optionsHTML}</div>
+                    ${feedbackHTML}
+                </div>
+            `;
+            
+            // Add event listeners to options
+            const optionElements = quizContainer.querySelectorAll('.option');
+            optionElements.forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+            
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finish Quiz' : 'Next';
+        }
+
+        // Select an option
+        function selectOption(e) {
+            if (userAnswers[currentQuestion] !== null) return; // Already answered
+            
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Check if answer is correct
+            if (selectedIndex === quizData[currentQuestion].answer) {
+                score++;
+                scoreEl.textContent = score;
+            }
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Show next question
+        function showNextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Show previous question
+        function showPreviousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Show results
+        function showResults() {
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            document.querySelector('.stats').style.display = 'none';
+            
+            finalScoreEl.textContent = score;
+            
+            // Performance message
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            if (percentage >= 80) {
+                message = 'Excellent! You have a strong understanding of Physiology 3 Lecture No. 2.';
+            } else if (percentage >= 60) {
+                message = 'Good job! You have a solid grasp of the material.';
+            } else if (percentage >= 40) {
+                message = 'Not bad! Review the material and try again.';
+            } else {
+                message = 'Keep studying! Review the lectures and try again.';
+            }
+            
+            performanceMessageEl.textContent = message;
+            resultsContainer.style.display = 'block';
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.querySelector('.stats').style.display = 'flex';
+            resultsContainer.style.display = 'none';
+            
+            showQuestion();
+            updateProgressBar();
+        }
+
+        // Initialize the quiz when the page loads
+        window.addEventListener('load', initQuiz);
+    </script>
+</body>
+</html>
